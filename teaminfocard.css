@@ -1,0 +1,109 @@
+.team-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 240px;
+    flex: 1 0 18%;
+    max-width: 250px;
+    padding: 1.25rem 1rem;
+    border-radius: .375rem;
+    transition: all 0.15s;
+    background-color: pink;
+}
+
+
+.team-image{
+    transition: 0.3s;
+    
+}
+
+
+
+.team-card:hover .content .img .team-image{
+
+    width: 0%;
+    height: 0%;
+}
+
+.team-card{
+    height: 250px
+}
+
+
+
+.extra-info{
+    display: none;
+    transition: 0.1s;
+    margin: 0;
+}
+
+.team-card:hover .content .details .extra-info{
+    display: block;
+    
+}
+
+
+
+.img {
+    display: flex;
+    justify-content: center;  
+}
+
+.fill{
+    flex: 0;
+    transition: flex 0.3s;
+}
+
+.team-card:hover .content .img .hovered{
+    flex: auto;
+}
+
+.team-card .content .img{
+    transition: 0.3s;
+}
+
+
+
+
+
+.container,
+.container-fluid,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    background-color: blue;
+}
+
+.content .name{
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: #000;
+  }
+
+  .red-highlight::selection {
+    background-color: #ffcccb;
+  }
+
+  .content .division{
+    font-size: .95rem;
+    color: #212529;
+    margin-bottom: .95rem;
+  }
+
+  .content .location{
+    font-size: .95rem;
+    color: #212529;
+    font-style: italic;
+    margin-bottom: .95rem;
+}
+
+  .content .details {
+      text-align: center;
+  }

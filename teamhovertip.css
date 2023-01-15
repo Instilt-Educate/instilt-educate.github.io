@@ -1,0 +1,25 @@
+.container.team-con{
+    position: relative;
+}
+
+#hover{
+    position: fixed;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    color: #000;
+    width: 100px;
+    height: 50px;
+    box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+
+}
+
+.team-card{
+    background-color: pink;
+}
+
+.container.team-con:hover #hover{
+    opacity: 1;
+    visibility: visible;
+}

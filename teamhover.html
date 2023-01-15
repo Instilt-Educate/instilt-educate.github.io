@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Options</title>
+    <link rel="stylesheet" href="teamhover.css" />
+    <link rel="stylesheet" href="teamhovertip.css" />
+  </head>
+
+  <body
+    id="page-top"
+    data-new-gr-c-s-check-loaded="14.1006.0"
+    data-gr-ext-installed
+    style="position: static"
+  >
+    <!------Card-------->
+    <div class="container team-con" id="container">
+      <div class="team-card" id="1">
+        <div class="content">
+          <div class="img mb-4 sm:mb-5">
+            <img
+              class="team-image"
+              onerror="removeElement(this)"
+              src="assets/img/team/Ayush Ravichandran.png"
+            />
+          </div>
+          <div class="details">
+            <div class="name red-highlight">Ayush Ravichandran</div>
+            <!-- <div class="division red-highlight extra-info">
+              Head of Technical Operations
+            </div>
+            <div class="location red-highlight extra-info">
+              Colombo, Sri Lanka
+            </div> -->
+          </div>
+        </div>
+        <span id="hover"> Info text for descriptions</span>
+    </div>
+    <!------------------>
+
+    <script type="text/javascript">
+        var hover = document.getElementById('hover');
+        window.onmousemove = function(e){
+            var x = e.clientX,
+                y = e.clientY;
+            hover.style.top = (y+20) + 'px';
+            hover.style.left = (x+20) + 'px';
+        }
+
+    </script>
+  </body>
+</html>
+
+<!-----
+
+----->
