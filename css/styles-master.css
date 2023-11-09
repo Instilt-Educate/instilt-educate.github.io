@@ -950,6 +950,15 @@ pre code {
     margin-left: 91.6666666667%;
 }
 
+/* MODIFIED: added media query for partners section */
+@media(max-width: 641px) {
+    .partner-heading {    
+        display: none;
+    }
+    #partner-img {
+        max-width: 70px; /*for profiles too?*/
+    }
+}
 
 #partner-img {
     display: flex;
@@ -4025,9 +4034,12 @@ input[type=button].btn-block {
     border-radius: 0.25rem;
 }
 
+/* MODIFIED: Long people, ALSO SEE: .img img {declare width:110px} */
 .team-image{
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 110px;
+    max-height: 110px;
+    object-fit: cover;
+    object-position: 50% 10%;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after {
@@ -10985,8 +10997,7 @@ a[href="mailto:edu@instilt.com"]:hover{
     margin-bottom: 0 !important;
 }
 
-
-
+/*MODIFIED: headings so they don't crowd the edge */
 .heading {
     color: #700000 !important;
     font-weight: 600;
@@ -10994,6 +11005,8 @@ a[href="mailto:edu@instilt.com"]:hover{
     text-align: center;
     font-size: 5rem;
     text-transform: capitalize;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .subheading {
@@ -11002,6 +11015,8 @@ a[href="mailto:edu@instilt.com"]:hover{
     font-family: montserrat !important;
     text-align: center;
     font-size: 3rem;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .method-heading {
@@ -11424,7 +11439,7 @@ form textarea{
 }
 
   .img img{
-    width: 150px;
+    width: 110px;
     border-radius: 50%;
   }
 
