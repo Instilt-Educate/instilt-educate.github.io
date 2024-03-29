@@ -2561,7 +2561,7 @@ textarea.form-control.is-invalid {
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
+    border-radius: 1rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -2572,7 +2572,7 @@ textarea.form-control.is-invalid {
 }
 
 .btn:hover {
-    color: #212529;
+    color: #0080ff;
     text-decoration: none;
 }
 
@@ -2613,7 +2613,7 @@ fieldset:disabled a.btn {
 .btn-primary.focus {
     color: #fff;
     background-color: #5b0000;
-    box-shadow: 0 0 0 0.2rem rgba(91, 0, 0, 0.5);
+    box-shadow: 0 0 0.2rem rgba(91, 0, 0, 0.5);
 }
 
 .btn-primary.disabled,
