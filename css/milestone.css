@@ -1,43 +1,11 @@
-
-:root{
-    --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #5b0000;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #343a40;
-    --primary: #5b0000;
-    --secondary: #6c757d;
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #343a40;
-    --black: #000000;
-}
-
-/*reset all margins and padding to zero*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 #milestone{
-    background: #FFFFFF;
+    background: #f8f8f8;
 }
 
 #milestone ul{
     text-align: center;
     margin: 40px auto;
+    padding: 0;
 }
 
 /*Bringing the list items to center of webpage*/
@@ -84,5 +52,11 @@
     border-radius: 25px;
     left: -10%;
     bottom: 2px;
-    
+
+}
+
+@media screen and (max-width: 532px){
+    #milestone ul li .milestone-line:after{
+        width: 125%;
+    }
 }

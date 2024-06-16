@@ -1425,7 +1425,112 @@ var simplemaps_worldmap_mapdata={
       lat: "30.0444",
       lng: "31.2357",
       name: "Cairo"
-    }
+    },
+    "101": {
+      lat: -18.91,
+      lng: 47.527,
+      name: "Antananarivo"
+    },
+    "102": {
+      lat: -33.542,
+      lng: -70.644,
+      name: "San Ramon"
+    },
+    "103": {
+      lat: -4.498,
+      lng: -79.133,
+      name: "Valladoid"
+    },
+    "104": {
+      lat: 10.983,
+      lng: -74.83,
+      name: "Barranquilla"
+    },
+    "105": {
+      lat: 21.305,
+      lng: -157.858,
+      name: "Hawaii"
+    },
+    "106": {
+      lat: 39.743,
+      lng: -8.812,
+      name: "Leiria"
+    },
+    "107": {
+      lat: 33.597,
+      lng: -7.619,
+      name: "Casablanca"
+    },
+    "108": {
+      lat: 36.772,
+      lng: 3.059,
+      name: "Algiers"
+    },
+    "109": {
+      lat: 32.895,
+      lng: 13.181,
+      name: "Tripoli"
+    },
+    "110": {
+      lat: 34.733,
+      lng: 10.751,
+      name: "Sfax"
+    },
+    "111": {
+      lat: 52.276,
+      lng: 76.97,
+      name: "Pavlodar"
+    },
+    "112": {
+      lat: 22.557,
+      lng: 114.119,
+      name: "ShenZhen"
+    },
+    paris: {
+      name: "Paris",
+      lat: "48.866666670",
+      lng: "2.333333333"
+    },
+    LA: {
+      lat: 34.054,
+      lng: -118.245,
+      name: "Los Angeles"
+    },
+    "113": {
+      lat: -1.284,
+      lng: 36.824,
+      name: "Nairobi"
+    },
+    "114": {
+      lat: 52.236,
+      lng: 21.01,
+      name: "Warsaw"
+    },
+    "115": {
+      lat: 40.98,
+      lng: 28.867,
+      name: "Rio De Janerio"
+    },
+    "116": {
+      lat: 52.423,
+      lng: 31.014,
+      name: "Gomel"
+    },
+    "117": {
+      lat: 24.682,
+      lng: 46.687,
+      name: "Riyadh"
+    },
+    "118": {
+      lat: -25.44,
+      lng: -49.277,
+      name: "Curitiba"
+    },
+    "119": {
+      lat: 44.645,
+      lng: -63.577,
+      name: "Helifax"
+    },
   },
   labels: {},
   legend: {

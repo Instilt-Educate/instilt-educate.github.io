@@ -3,7 +3,7 @@ html{
 }
 
 body{
-    background-color: #fff;
+    background-color: #f8f8f8;
 }
 
 #model .container h1{
@@ -29,6 +29,7 @@ body{
 .slider .owl-item.active.center .slider-card{
     transform: scale(1.15);
     opacity: 1;
+    z-index: 1 !important;
     background-color: #ccc;
     color: #fff;
 }
@@ -85,6 +86,7 @@ body{
     right: 0;
     opacity: 1;
     z-index: 2;
+    right: -3rem;
     font-size: 40px !important;
 }
 
@@ -93,8 +95,29 @@ body{
     top: calc(45% - 25px);
     left: 0;
     opacity: 1;
-    z-index: 1; 
+    z-index: 1;
+    left: -3rem; 
     font-size: 40px !important;
+}
+
+@media screen and (max-width: 641px){
+    .owl-nav .owl-next{
+        right: -2rem;
+    }
+
+    .owl-nav .owl-prev{
+        left: -2rem;
+    }
+}
+
+@media screen and (max-width: 641px){
+    .owl-nav .owl-next{
+        right: -1rem;
+    }
+
+    .owl-nav .owl-prev{
+        left: -1rem;
+    }
 }
 
 #blog{
@@ -109,7 +132,7 @@ body{
 
 .carousel-item{
     height: auto;
-    background: #777;
+    background: #999;
     margin-top: 5%;
     position: relative;
 }
