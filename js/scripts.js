@@ -76,9 +76,10 @@ async function onPageLoad() {
 	// document.getElementById("loading_text").hidden = false;
 	// const data = await getTeamData();
 	// if (data != null) {
+	//   console.log(data);
 	//   document.getElementById("loading_text").hidden = true;
-	//   // Display the fetched data
-	//   loadImages(data);
+	// //   Display the fetched data
+	//   loadImages(data);	
 	// } else {
 	//   document.getElementById("loading_text").hidden = true;
 	// import data from data.js
@@ -86,10 +87,11 @@ async function onPageLoad() {
 	var partnerData;
 	import('./data.js').then((data) => {
 		teamData = data.teamData;
-		partnerData = data.partnerData;
+		partnerData = data.partnerData;	
 		loadImages(teamData);
 		loadPartners(partnerData);
 	})
+// }
 	// }
 }
 
@@ -119,12 +121,21 @@ function loadImages(data) {
 		}
 		return m;
 	});
-	// display admins
+	// display cards in order
+
+	var founder = data.filter(
+		(m) => 
+			m.position === "Founder" ||
+			m.team === "Founder" ||
+			m.division === "Founder"
+	);
+	addCards(founder);
+
 	var CEO = data.filter(
 		(m) =>
-			m.position?.includes("CEO") ||
-			m.team?.includes("CEO") ||
-			m.division?.includes("CEO")
+			m.position?.includes("Chief Executive Officer") ||
+			m.team?.includes("Chief Executive Officer") ||
+			m.division?.includes("Chief Executive Officer")
 	);
 	addCards(CEO);
 
