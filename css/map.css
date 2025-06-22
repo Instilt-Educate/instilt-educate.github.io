@@ -1,0 +1,181 @@
+#map {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    background-color: black;
+}
+
+/* switcher container*/
+body span.switcher {
+    position: relative;
+    width: 240px;
+    height: 55px;
+    margin-top: 60px;
+    margin-left: 250px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/*toggle input style*/
+body span.switcher input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 240px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #700000;
+    outline: none;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* text content for toggle*/
+body span.switcher input:before,
+body span.switcher input:after {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+body span.switcher input:before {
+    content: "MEMBERS";
+    left: 23px;
+}
+
+body span.switcher input:after {
+    content: "BATCHES";
+    right: 24px;
+}
+
+/* toggle label styling*/
+body span.switcher label {
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    bottom: 20px;
+    border-radius: 20px;
+    background-color: #1E1E1E;
+    left: 130px;
+    right: 5px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body span.switcher.switcher-1 input:checked+label, 
+body span.switcher.switcher-1 input:not(:checked)+label {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* switcher transition for checked state */
+body span.switcher.switcher-1 input {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body span.switcher.switcher-1 input:not(:checked) {
+    background-color: #1E1E1E;
+}
+
+body span.switcher.switcher-1 input:not(:checked):before {
+    color: #CCCCCC;
+    transition: color 0.5s 0.2s;
+}
+
+body span.switcher.switcher-1 input:not(:checked):after {
+    color: #CCCCCC;
+    transition: color 0.5s;
+}
+
+body span.switcher.switcher-1 input:not(:checked)+label {
+    left: 15px;
+    right: 120px;
+    bottom: 9px;
+    background: #700000;
+    transition: left 0.5s, right 0.4s 0.2s, background-color 0.3s;
+}
+
+
+/* switcher transition for unchecked state */
+body span.switcher.switcher-1 input:checked {
+    background: #700000;
+    transition: all 0.4s ease-in-out;
+}
+
+body span.switcher.switcher-1 input:checked:before {
+    color: #CCCCCC;
+    transition: color 0.5s;
+}
+
+body span.switcher.switcher-1 input:checked:after {
+    color: #CCCCCC;
+    transition: color 0.5s 0.2s;
+}
+
+body span.switcher.switcher-1 input:checked+label {
+    left: 130px;
+    right: 5px;
+    bottom: 9px;
+    background: #1E1E1E;
+    transition: all 0.4s ease-in-out;
+}
+
+
+/* pop-up styles*/
+
+.content-container {
+    display: flex;/* Use flexbox for layout */
+    justify-content: space-between;/* Create space between text and image */
+    align-items: flex-start;/* Align items at the top */
+    margin-top: 10px;
+    gap: 20px;/* Add space between the text and the image */
+}
+
+.batch-name {
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.org-link {
+    text-decoration: underline;
+    color: #6a0dad;
+    font-weight: bold;
+}
+
+.org-link:hover {
+    color: #6a0dad;
+    text-decoration: none;
+}
+
+.image-container {
+    display: flex;
+    /* Use flexbox */
+    justify-content: space-between;
+    /* Ensure the text and image have space between them */
+    align-items: flex-start;
+    /* Align items at the top */
+    margin-top: 10px;
+    gap: 20px;
+    /* Add some space between the text and the image */
+}
+
+.image-container img {
+    max-width: 100%;
+    /* Adjust the size of the image */
+    border-radius: 5px;
+}
+
+.text-content {
+    max-width: 45%; /*limit text width*/
+}
