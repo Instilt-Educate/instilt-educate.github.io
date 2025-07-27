@@ -728,88 +728,94 @@ var simplemaps_worldmap_mapdata = {
             lat: "-6.135730",
             lng: "39.362122",
             name: "Zanzibar <br> Number of Students: 3",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>AFEN36<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><span class="batch-name">AFEN36</span><p>This batch included students from Senegal, Zanzibar, and Madagascar, most of whom were affiliated with Barefoot College as instructors or office staff. This batch demonstrated the scalability and adaptability of our curriculum and tutors, while also reinforcing the importance of language equity in adult education. The marked improvement in students’ comfort and confidence of the language only reaffirms our commitment to making English education accessible, inclusive, and impactful.</p></div>'
         },
         "1": {
             lat: "-19.8633617",
             lng: "46.5262506",
             name: "Madagascar <br> Number of Students: 8",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>GTEN35<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><span class="batch-name">AFEN36</span><p>This batch included students from Senegal, Zanzibar, and Madagascar, most of whom were affiliated with Barefoot College as instructors or office staff. This batch demonstrated the scalability and adaptability of our curriculum and tutors, while also reinforcing the importance of language equity in adult education. The marked improvement in students’ comfort and confidence of the language only reaffirms our commitment to making English education accessible, inclusive, and impactful. </p></div>'
         },
         "2": {
             lat: "30.0214489",
             lng: "31.4904086",
             name: "Cairo <br> Number of Students: 16",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>EGEN33<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>EGEN33</p></div> </div><div><span class="batch-name"></span></div>'
         },
         "3": {
             lat: "15.6093419",
             lng: "-90.5600285",
             name: "Guatemala <br> Number of Students: 4",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>GTEN35<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>GTEN35</p></div> </div><div><span class="batch-name"></span></div>'
         },
+        "4": {
+            lat: "30.75748767883997",
+            lng: "76.8197241565849",
+            name: "Chandigarh <br> Number of Students: 66",
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN25</p></div> </div><div><span class="batch-name"></span></div>'
+            },
         "5": {
             lat: "12.872690366167038",
             lng: "77.67121939838034",
             name: "Bengaluru <br> Number of Students: 172",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN04, INEN17, INEN26<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><span class="batch-name">INEN04</span><p>This batch, INEN04 from Bengaluru, comprised Kannada-speaking students, with most expressing a strong desire to improve their spoken English. As a result, the program placed greater emphasis on speaking practice, leading to marked improvement in fluency and confidence. In addition to regular sessions, students participated in interactive “English Game Days” and group discussions, which provided fun, low-pressure environments to practice speaking and vocabulary. These activities played a key role in encouraging active communication and fostering a supportive learning atmosphere.</p></div> </div><div><span class="batch-name">INEN17, INEN26, INEN40</span></div>'
         },
-        "7": {
+        "6": {
             lat: "28.714817100672157",
             lng: "77.10238113358153",
-            name: "Delhi <br> Number of Students: 834",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>Delhi: INEN06, INEN08, INEN09, INEN11, INEN12, INEN16, INEN18, INEN22, INEN23, INEN27, INEN28, INEN32, INEN37 Bulandshahr: INEN03, INEN16, INEN23<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            name: "Delhi <br> Number of Students: 855",
+            description: '<div class="content-container"><span class="batch-name">INEN06</span><p>This batch consisted of Hindi-speaking students across four classrooms, primarily in the primary and middle school age groups. Over the course of the program, students showed significant improvement, particularly in reading and writing skills, and became notably more comfortable speaking English. In addition to regular lessons, students actively participated in debates, watched movies, and took part in “Just a Minute” competitions, which helped boost their confidence and language fluency in engaging, creative ways.</p></div> </div><div><span class="batch-name">Delhi: INEN08, INEN09, INEN11, INEN16, INEN18, INEN23, INEN27, INEN28, INEN32, INEN37, INEN45 <br> Bulandshahr: INEN03, INEN16, INEN23</span></div>'
         },
-        "11": {
+        "7": {
             lat: "33.35870646689087",
             lng: "74.72751256312212",
             name: "Chassana, Reasi <br> Number of Students: 24",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN29<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN29</p></div> </div><div><span class="batch-name"></span></div>'
         },
-        "12": {
+        "8": {
             lat: "22.362553698503227",
             lng: "82.70636957646961",
             name: "Korba <br> Number of Students: 91",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN39<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div></div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN39</p></div></div><div><span class="batch-name"></span></div>'
         },
-        "13": {
+        "9": {
             lat: "-2.0201343718042812",
             lng: "29.915086557984797",
             name: "Rwanda <br> Number of Students: 61",
             description: ' <div class="content-container"><div class="text-content"><span class="batch-name">RWEN19:</span><p>In the 2023/2024 year, we launched our first cohort in Rwanda, marking our inaugural venture into a new continent. Partnering with the <a href="https://www.rwandagirlsinitiative.org" target="_blank">Rwanda Girls Initiative</a>, we empowered bright female students through immersive English learning and educational support, showcasing the impact of our program and the strong connections between tutors and students. </p></div><div class="image-container"><img src="/map_images/RWEN19-grad1.png" alt="Cohort Image" /></div></div><div><span class="batch-name">RWEN41</span></div>',
         },
-        "14": {
+        "10": {
             lat: "7.607365622998655",
             lng: "80.70624999705292",
             name: "Sri Lanka <br> Number of Students: 265",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>SLEN05, SLEN10, SLEN15, SLEN21<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>SLEN05, SLEN10, SLEN15, SLEN21</p></div> </div><div><span class="batch-name"></span></div>'
         },
-        "15": {
+        "11": {
             lat: "13.084",
             lng: "80.283",
             name: "Chennai <br> Number of Students: 526",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN02, INEN13, INEN24, INEN34<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN02, INEN13, INEN24, INEN34</p></div> </div><div><span class="batch-name"></span></div>'
         },
-        "16": {
+        "12": {
             lat: "14.497401",
             lng: "-14.452362",
             name: "Senegal <br> Number of Students: 2",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>AFEN36<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><span class="batch-name">AFEN36</span><p>This batch included students from Senegal, Zanzibar, and Madagascar, most of whom were affiliated with Barefoot College as instructors or office staff. This batch demonstrated the scalability and adaptability of our curriculum and tutors, while also reinforcing the importance of language equity in adult education. The marked improvement in students’ comfort and confidence of the language only reaffirms our commitment to making English education accessible, inclusive, and impactful.</p></div>'
         },
-        "17": {
+        "13": {
             lat: "26.847067388484213",
             lng: " 80.95182363358217",
             name: "Lucknow <br> Number of Students: 82",
-            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN43, INEN44<a href="https://www.rwandagirlsinitiative.org" target="_blank">link</a></p></div> </div><div><span class="batch-name"></span></div>'
+            description: '<div class="content-container"><div class="text-content"><span class="batch-name"></span><p>INEN43, INEN44</p></div> </div><div><span class="batch-name"></span></div>'
         },
-        "18": {
+        "14": {
             lat: "30.038374509420457",
             lng: "74.63240148965006",
             name: "Muktsar <br> Number of Students: 115",
             description: '<div class="content-container"><div class="text-content"><span class="batch-name">INEN30 & INEN42: </span><p> In July 2024, we launched a long-term partnership with <a href="https://schools.org.in/muktsar/03120201205/pseb-bibi-surinder-kaur-badal-adarsh-sen-sec-sch.html#google_vignette" target="_blank">Bibi Surinder Kaur Badal Adarsh Senior Secondary School</a>, bringing together students and teachers in the same learning space for the first time. Starting as beginners, participants progressed to an advanced English curriculum covering grammar, speaking, listening, reading, and writing. Students in our program outperformed their peers in school assessments, and strong bonds were formed through regular interaction and shared growth. The involvement of teachers was a proud milestone, and the heartfelt appreciation from learners highlighted the impact and dedication of everyone involved.</p></div><div class="image-container"><img src="/map_images/INEN30.jpg" alt="Batch Image" /></div></div><div><span class="batch-name"></span></div>'
         }
     },
-
+    
     labels: {},
     legend: {
         entries: []
