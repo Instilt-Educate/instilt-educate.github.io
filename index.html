@@ -44,12 +44,13 @@
     <link rel="stylesheet" href="css/gallery/owl.theme.default.css ">
     <link rel="stylesheet" href="css/gallery/gallery-style.css">
     <link rel="stylesheet" href="css/gallery/animate.css">
+    <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     <script src="https://kit.fontawesome.com/21cad11b53.js" crossorigin="anonymous"></script>
-    <script src="js/mapdata.js"></script>
-    <script src="js/worldmap.js"></script>
+    <script id="mapdata-script" src="js/mapdata.js" type="application/javascript"></script>
+    <script id="mapjs-script" src="js/worldmap.js"></script>
 
     <script async src="https://tally.so/widgets/embed.js"></script>
 
@@ -235,12 +236,14 @@
     <!-- MAP -->    
     <h2 id="maptext" style="text-transform: none; text-align: center;">Diverse Community of Members</h2>
     <br>
-    <span class="switcher switcher-1">
+    <div class="map-container">
+        <span class="switcher switcher-1">
         <input type="checkbox" id="switcher-1" onchange="toggleMap()">
         <label for="switcher-1"></label>
-        <link rel="stylesheet" href="map.css">
     </span>
     <div id="map"></div>
+    </div>
+    
 
     <!-- Owl Carousel Gallery -->
     <section id="model">
@@ -580,50 +583,57 @@
         let currentMap = "members";
         let zoomIntervalID = null;
 
-        function loadScript(src, callback) {
-            const script = document.createElement("script");
+
+        function removeScriptById(id) {
+            const el = document.getElementById(id);
+            if (el) el.parentNode.removeChild(el);
+        }
+
+        function addScript(id, src, onload) {
+            const script = document.createElement('script');
+            script.id = id;
             script.src = src;
-            script.onload = callback;
+            script.onload = onload || null;
             document.body.appendChild(script);
         }
 
         function toggleMap() {
             const checkbox = document.getElementById("switcher-1");
-
-            // Clear the previous map (if required)
             document.getElementById("map").innerHTML = "";
 
+            // Remove any existing map scripts
+            removeScriptById("mapdata-script");
+            removeScriptById("mapjs-script");
+
             if (checkbox.checked) {
-                // If checkbox is checked, load the Batches map
-                loadScript("batches_mapdata.js", () => {
-                    loadScript("batches_map.js", () => {
-                        console.log("Batches map loaded.");
-                        
+                // Batches map
+                addScript("mapdata-script", "js/batches_mapdata.js", function() {
+                    addScript("mapjs-script", "js/batches_map.js", function() {
                         setTimeout(registerZoomHook, 50);
-                        console.log(simplemaps_worldmap.mapdata.main_settings.location_size);
+                        currentMap = "batches";
                     });
                 });
-                currentMap = "batches";
             } else {
-                // If checkbox is unchecked, load the Members map
-                
-                loadScript("mapdata.js", () => {
-                    loadScript("map.js", () => {
-                        console.log("Members map loaded.");
+                // Members map
+                addScript("mapdata-script", "js/mapdata.js", function() {
+                    addScript("mapjs-script", "js/worldmap.js", function() {
+                        currentMap = "members";
                     });
                 });
-                currentMap = "members";
             }
         }
 
         // Load the initial map
         window.onload = () => {
-                loadScript("mapdata.js", () => {
-                    loadScript("map.js", () => {
-                        console.log("Members map loaded.");
-                    });
+            document.getElementById("map").innerHTML = "";
+            removeScriptById("mapdata-script");
+            removeScriptById("mapjs-script");
+            addScript("mapdata-script", "js/mapdata.js", function() {
+                addScript("mapjs-script", "js/worldmap.js", function() {
+                    currentMap = "members";
                 });
-            };
+            });
+        };
 
         function registerZoomHook() {
             if (window.simplemaps_worldmap) {
@@ -636,7 +646,6 @@
                     const currentZoom = simplemaps_worldmap.zoom_level;
 
                     if (currentZoom !== lastZoomLevel && currentMap === "batches") {
-                                console.log("I just ran!");
                                 lastZoomLevel = currentZoom;
                                 if(true){
                                     if(currentZoom === "out"){
@@ -645,7 +654,6 @@
                                         simplemaps_worldmap.mapdata.main_settings.location_size *= 1.6; // Increases marker size
                                     }
                                 }
-                                
 
                                 simplemaps_worldmap.refresh(); // re-render the map with updated config
                     }
@@ -711,6 +719,7 @@
                 if (currStep >= steps) clearInterval(transition);
             }, interval)
         }   
+        toggleMap();
     </script>
 
 </body>
