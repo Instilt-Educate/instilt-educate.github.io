@@ -126,3 +126,21 @@
     background: #1E1E1E;
     transition: all 0.4s ease-in-out;
 }
+
+.image-container {
+    display: flex;
+    /* Use flexbox */
+    justify-content: space-between;
+    /* Ensure the text and image have space between them */
+    align-items: flex-start;
+    /* Align items at the top */
+    margin-top: 10px;
+    gap: 20px;
+    /* Add some space between the text and the image */
+}
+
+.image-container img {
+    max-width: 100%;
+    /* Adjust the size of the image */
+    border-radius: 5px;
+}
