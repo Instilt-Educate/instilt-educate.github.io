@@ -81,7 +81,7 @@ function removePopupImage() {
 
 async function getTeamData() {
 	try {
-		const URL = "https://tutor-timings.vercel.app/getRecords";
+		const URL = "https://tutor-timings.vercel.app/getDetails";
 
 		const res = await fetch(URL, { method: "GET" });
 		if (res.status != 200) {
@@ -96,27 +96,29 @@ async function getTeamData() {
 }
 
 async function onPageLoad() {
-	// const dataContainer = document.getElementById("loading_text");
-	// dataContainer.textContent = "Loading...";
-	// document.getElementById("loading_text").hidden = false;
-	// const data = await getTeamData();
-	// if (data != null) {
-	//   console.log(data);
-	//   document.getElementById("loading_text").hidden = true;
-	//   // Display the fetched data
-	//   loadImages(data);	
-	// } else {
-	//   document.getElementById("loading_text").hidden = true;
-	// }
 	// import data from data.js
-	var teamData;
+	// var teamData;
 	var partnerData;
 	import('./data.js').then((data) => {
-		teamData = data.teamData;
+	// 	teamData = data.teamData;
 		partnerData = data.partnerData;	
-		loadImages(teamData);
+	// 	loadImages(teamData);
 		loadPartners(partnerData);
 	})
+
+
+	const dataContainer = document.getElementById("loading_text");
+	dataContainer.textContent = "Loading...";
+	document.getElementById("loading_text").hidden = false;
+	const data = await getTeamData();
+	if (data != null) {
+		// console.log(data);
+		document.getElementById("loading_text").hidden = true;
+		// Display the fetched data
+		loadImages(data);	
+	} else {
+		document.getElementById("loading_text").hidden = true;
+	}
 // }
 	// }
 }
@@ -152,6 +154,11 @@ function loadImages(data) {
 	// remove certain people
 	const remove = ["Danisha Panigrahi", "Shravani Tushar Kulkarni"]
 	data = data.filter((m) => !remove.includes(m.name))
+	data.map(card => {
+		if (card.position == "Cohort Head" && card.cohort) {
+			card.position = card.cohort + " " + card.position;
+		}
+	})
 
 	var founder = data.filter(
 		(m) => 
@@ -177,17 +184,17 @@ function loadImages(data) {
 	);
 	addCards(CFO);
 
-	var HR_TO = data.filter(m => m.division?.includes("Head of Technical Operations") || m.division?.includes("Head of Human Resources"));
-	addCards(HR_TO);
+	var HEAD_TECH_OPS = data.filter(m => m.position?.includes("Head of Technical Operations"))
+	addCards(HEAD_TECH_OPS);
+
+	var HEAD_HR = data.filter(m => m.position?.includes("Head of Human Resources"));
+	addCards(HEAD_HR);
 
 	var team_heads = data.filter(m => m.position?.includes("Head of") || m.team?.includes("Head of") || m.division?.includes("Head of"));
 	addCards(team_heads);
 
 	var admins = data.filter((m) => m.team === "Admin");
 	addCards(admins);
-
-	var Newsletter = data.filter((m) => m.team === "Newsletter");
-	addCards(Newsletter);
 
 	var HR = data.filter((m) => m.team === "Human Resources");
 	addCards(HR);
@@ -197,6 +204,9 @@ function loadImages(data) {
 
 	var techOps = data.filter((m) => m.team === "Technical Operations");
 	addCards(techOps);
+
+	var otherHeads = data.filter((m) => m.position?.includes("Head"));
+	addCards(otherHeads);
 
 	// other members
 	addCards(data);

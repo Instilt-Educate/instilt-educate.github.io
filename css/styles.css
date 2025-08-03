@@ -779,7 +779,7 @@ a:hover {
 @media (min-width: 1200px) {
     .team-card:hover {
         cursor: default;
-        box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+        box-shadow: 0 5px 10px rgba(154, 160, 185, .5), 0 15px 40px rgba(166, 173, 201, .8);
         transition: all 0.15s;
     }
 }
@@ -1862,4 +1862,8 @@ input {
         max-height: 600px !important;
     }
     
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
