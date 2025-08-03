@@ -235,6 +235,11 @@
     <!-- MAP -->    
     <h2 id="maptext" style="text-transform: none; text-align: center;">Diverse Community of Members</h2>
     <br>
+    <span class="switcher switcher-1">
+        <input type="checkbox" id="switcher-1" onchange="toggleMap()">
+        <label for="switcher-1"></label>
+        <link rel="stylesheet" href="map.css">
+    </span>
     <div id="map"></div>
 
     <!-- Owl Carousel Gallery -->
@@ -569,6 +574,144 @@
     <script type="text/javascript" async src="https://embeds.beehiiv.com/attribution.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="js/news-carousel-script.js" type="module"></script>
+
+    <!-- MAP JS -->
+    <script>
+        let currentMap = "members";
+        let zoomIntervalID = null;
+
+        function loadScript(src, callback) {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = callback;
+            document.body.appendChild(script);
+        }
+
+        function toggleMap() {
+            const checkbox = document.getElementById("switcher-1");
+
+            // Clear the previous map (if required)
+            document.getElementById("map").innerHTML = "";
+
+            if (checkbox.checked) {
+                // If checkbox is checked, load the Batches map
+                loadScript("batches_mapdata.js", () => {
+                    loadScript("batches_map.js", () => {
+                        console.log("Batches map loaded.");
+                        
+                        setTimeout(registerZoomHook, 50);
+                        console.log(simplemaps_worldmap.mapdata.main_settings.location_size);
+                    });
+                });
+                currentMap = "batches";
+            } else {
+                // If checkbox is unchecked, load the Members map
+                
+                loadScript("mapdata.js", () => {
+                    loadScript("map.js", () => {
+                        console.log("Members map loaded.");
+                    });
+                });
+                currentMap = "members";
+            }
+        }
+
+        // Load the initial map
+        window.onload = () => {
+                loadScript("mapdata.js", () => {
+                    loadScript("map.js", () => {
+                        console.log("Members map loaded.");
+                    });
+                });
+            };
+
+        function registerZoomHook() {
+            if (window.simplemaps_worldmap) {
+                if (zoomIntervalID) {
+                    clearInterval(zoomIntervalID);
+                }
+
+                let lastZoomLevel = simplemaps_worldmap.zoom_level;
+                zoomIntervalID = setInterval(() => {
+                    const currentZoom = simplemaps_worldmap.zoom_level;
+
+                    if (currentZoom !== lastZoomLevel && currentMap === "batches") {
+                                console.log("I just ran!");
+                                lastZoomLevel = currentZoom;
+                                if(true){
+                                    if(currentZoom === "out"){
+                                        simplemaps_worldmap.mapdata.main_settings.location_size /= 1.6 ; // Decreases marker size
+                                    }else if(currentZoom === "region"){
+                                        simplemaps_worldmap.mapdata.main_settings.location_size *= 1.6; // Increases marker size
+                                    }
+                                }
+                                
+
+                                simplemaps_worldmap.refresh(); // re-render the map with updated config
+                    }
+                }, 200);
+            } else {
+            setTimeout(registerZoomHook, 100);
+            }
+        }
+
+        function gradualResizeImageMarkers(increase, multiplier) {
+            const steps = 10;
+            const interval = 10; // ms between animation steps
+
+            // Delay briefly to let DOM update after zoom
+            setTimeout(() => {
+                const images = document.querySelectorAll("#map img");
+
+                images.forEach(img => {
+                    // Get current scale from transform
+                    const transform = img.style.transform;
+                    const match = /scale\(([\d.]+)\)/.exec(transform);
+                    const currentScale = match ? parseFloat(match[1]) : 1;
+
+                    const targetScale = increase
+                        ? currentScale * multiplier
+                        : currentScale / multiplier;
+
+                    const stepScale = (targetScale - currentScale) / steps;
+
+                    let currStep = 0;
+
+                    const animate = setInterval(() => {
+                        currStep++;
+                        const newScale = currentScale + stepScale * currStep;
+                        img.style.transform = `scale(${newScale})`;
+                        img.style.transformOrigin = "center center"; // ensures smooth zoom from center
+
+                        if (currStep >= steps) clearInterval(animate);
+                    }, interval);
+                });
+            }, 50); // wait ~1 frame after zoom
+        }
+
+        //Function to make the increase and decrease in marker size more gradual
+        //increase specifies whether we're increasing or decreasing marker size (True = increase, False = decrease)
+        //Multiplier specifies how much we're changing size by, ex: 2.5x
+        function gradualZoom(increase, multiplier) {
+            const steps = 10;
+            const interval = 1; //1 milliseconds for duration of each transition step
+
+            let currStep = 0;
+
+            let initialSize = simplemaps_worldmap.mapdata.main_settings.location_size;
+            let finalSize = (increase) ? simplemaps_worldmap.mapdata.main_settings.location_size * multiplier : simplemaps_worldmap.mapdata.main_settings.location_size / multiplier;
+
+            //This setInterval helps make the transition smoother
+            const transition = setInterval(() => {
+                currStep++;
+
+                simplemaps_worldmap.mapdata.main_settings.location_size = initialSize + (finalSize - initialSize) * (currStep / steps);
+                simplemaps_worldmap.refresh();
+
+                if (currStep >= steps) clearInterval(transition);
+            }, interval)
+        }   
+    </script>
 
 </body>
 <script>
