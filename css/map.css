@@ -11,8 +11,8 @@
     justify-content: center;
 }
 
-/* switcher container*/
-.switcher {
+/* switcher container */
+.map-container .switcher {
     position: relative;
     width: 240px;
     height: 55px;
@@ -22,43 +22,42 @@
     display: flex;
 }
 
-/*toggle input style*/
-.switcher input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+/* toggle input style */
+.map-container .switcher input {
+    all: unset; /* reset Bootstrap/global form styles */
     position: relative;
     width: 240px;
     height: 50px;
     border-radius: 25px;
     background-color: #700000;
-    outline: none;
     font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    cursor: pointer;
 }
 
-/* text content for toggle*/
-.switcher input:before,
-.switcher input:after {
+/* text content for toggle */
+.map-container .switcher input:before,
+.map-container .switcher input:after {
     z-index: 2;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 14px;
+    pointer-events: none;
 }
 
-.switcher input:before {
+.map-container .switcher input:before {
     content: "MEMBERS";
-    left: 23px;
+    left: 26px;
 }
 
-.switcher input:after {
+.map-container .switcher input:after {
     content: "BATCHES";
-    right: 24px;
+    right: 25px;
 }
 
-/* toggle label styling*/
-.switcher label {
+/* toggle label styling */
+.map-container .switcher label {
     z-index: 1;
     position: absolute;
     top: 10px;
@@ -68,33 +67,30 @@
     left: 130px;
     right: 5px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block !important; /* ensure visible */
+    color: #fff !important;
 }
 
-.switcher.switcher-1 input:checked+label, 
-.switcher.switcher-1 input:not(:checked)+label {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* switcher transition for checked state */
-.switcher.switcher-1 input {
+/* switcher transitions */
+.map-container .switcher.switcher-1 input {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.switcher.switcher-1 input:not(:checked) {
+.map-container .switcher.switcher-1 input:not(:checked) {
     background-color: #1E1E1E;
 }
 
-.switcher.switcher-1 input:not(:checked):before {
+.map-container .switcher.switcher-1 input:not(:checked):before {
     color: #CCCCCC;
     transition: color 0.5s 0.2s;
 }
 
-.switcher.switcher-1 input:not(:checked):after {
+.map-container .switcher.switcher-1 input:not(:checked):after {
     color: #CCCCCC;
     transition: color 0.5s;
 }
 
-.switcher.switcher-1 input:not(:checked)+label {
+.map-container .switcher.switcher-1 input:not(:checked) + label {
     left: 15px;
     right: 120px;
     bottom: 9px;
@@ -102,45 +98,50 @@
     transition: left 0.5s, right 0.4s 0.2s, background-color 0.3s;
 }
 
-
-/* switcher transition for unchecked state */
-.switcher.switcher-1 input:checked {
+.map-container .switcher.switcher-1 input:checked {
     background: #700000;
     transition: all 0.4s ease-in-out;
 }
 
-.switcher.switcher-1 input:checked:before {
+.map-container .switcher.switcher-1 input:checked:before {
     color: #CCCCCC;
     transition: color 0.5s;
 }
 
-.switcher.switcher-1 input:checked:after {
+.map-container .switcher.switcher-1 input:checked:after {
     color: #CCCCCC;
     transition: color 0.5s 0.2s;
 }
 
-.switcher.switcher-1 input:checked+label {
+.map-container .switcher.switcher-1 input:checked + label {
     left: 130px;
-    right: 5px;
+    right: 15px;
     bottom: 9px;
     background: #1E1E1E;
     transition: all 0.4s ease-in-out;
 }
 
-.image-container {
+/* image container in map section */
+.map-container .image-container {
     display: flex;
-    /* Use flexbox */
     justify-content: space-between;
-    /* Ensure the text and image have space between them */
     align-items: flex-start;
-    /* Align items at the top */
     margin-top: 10px;
     gap: 20px;
-    /* Add some space between the text and the image */
 }
 
-.image-container img {
+.map-container .image-container img {
     max-width: 100%;
-    /* Adjust the size of the image */
     border-radius: 5px;
+}
+
+.map-container #tt_sm_map {
+    position: absolute;
+    z-index: 1000 !important;
+    max-width: 500px;   /* adjust as needed */
+    max-height: 500px;  /* adjust as needed */
+    overflow-y: auto;   /* scroll if too tall */
+    overflow-x: hidden;
+    word-wrap: break-word; /* prevent long words from overflowing */
+    white-space: normal;   /* allow wrapping */
 }

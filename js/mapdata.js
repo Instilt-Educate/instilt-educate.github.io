@@ -36,7 +36,9 @@ var simplemaps_worldmap_mapdata={
     label_hover_color: "",
     label_size: "",
     label_font: "",
-    border_size: "0"
+    border_size: "0",
+    popup_color: "#FFFFFF", // solid white background
+    popup_opacity: 1,       // 1 = fully opaque
   },
   state_specific: {
     AE: {
