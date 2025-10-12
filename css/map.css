@@ -135,13 +135,32 @@
     border-radius: 5px;
 }
 
-.map-container #tt_sm_map {
-    position: absolute;
-    z-index: 1000 !important;
-    max-width: 500px;   /* adjust as needed */
-    max-height: 500px;  /* adjust as needed */
-    overflow-y: auto;   /* scroll if too tall */
-    overflow-x: hidden;
-    word-wrap: break-word; /* prevent long words from overflowing */
-    white-space: normal;   /* allow wrapping */
+/*pop-up container*/
+.map-container .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.map-container .batch-name {
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.map-container .org-link {
+    text-decoration: underline;
+    color: #6a0dad;
+    font-weight: bold;
+}
+
+.map-container .org-link:hover {
+    color: #6a0dad;
+    text-decoration: none;
+}
+
+.map-container .text-content {
+    max-width: 45%; 
 }
