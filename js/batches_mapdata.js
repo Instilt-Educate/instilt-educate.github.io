@@ -782,7 +782,7 @@ var simplemaps_worldmap_mapdata = {
             lat: "-2.0201343718042812",
             lng: "29.915086557984797",
             name: "Rwanda <br> Number of Batches: 2",
-            description: ' <div class="content-container"><div class="text-content"><p>In the 2023/2024 year, we launched our first cohort in Rwanda, marking our inaugural venture into a new continent. Partnering with the <a href="https://www.rwandagirlsinitiative.org" target="_blank">Rwanda Girls Initiative</a>, we empowered bright female students through immersive English learning and educational support, showcasing the impact of our program and the strong connections between tutors and students. </p></div><div class="image-container"><img src="/map_images/RWEN19-grad1.png" alt="Cohort Image" /></div></div>',
+            description: ' <div class="content-container"><div class="text-content"><p>In the 2023/2024 year, we launched our first cohort in Rwanda, marking our inaugural venture into a new continent. Partnering with the <a href="https://www.rwandagirlsinitiative.org" target="_blank">Rwanda Girls Initiative</a>, we empowered bright female students through immersive English learning and educational support, showcasing the impact of our program and the strong connections between tutors and students. </p></div><div class="image-container"><img src="assets/img/map_images/RWEN19-grad1.png" alt="Cohort Image" /></div></div>',
         },
         "10": {
             lat: "7.607365622998655",
@@ -793,7 +793,7 @@ var simplemaps_worldmap_mapdata = {
         "11": {
             lat: "13.084",
             lng: "80.283",
-            name: "Chennai <br> Number of Batches: 4",
+            name: "Chennai <br> Number of Batches: 7",
             description: '<div class="content-container"><div class="text-content"><p></p></div> </div>'
         },
         "12": {
@@ -812,7 +812,7 @@ var simplemaps_worldmap_mapdata = {
             lat: "30.038374509420457",
             lng: "74.63240148965006",
             name: "Muktsar <br> Number of Batches: 2",
-            description: '<div class="content-container"><div class="text-content"><p> In July 2024, we launched a new batch, bringing together students and teachers in the same learning space for the first time. Starting as beginners, participants progressed to an advanced English curriculum covering grammar, speaking, listening, reading, and writing. Students in our program outperformed their peers in school assessments, and strong bonds were formed through regular interaction and shared growth. The involvement of teachers was a proud milestone, and the heartfelt appreciation from learners highlighted the impact and dedication of everyone involved.</p></div><div class="image-container"><img src="/map_images/INEN30.jpg" alt="Batch Image" /></div></div>'
+            description: '<div class="content-container"><div class="text-content"><p> In July 2024, we launched a new batch, bringing together students and teachers in the same learning space for the first time. Starting as beginners, participants progressed to an advanced English curriculum covering grammar, speaking, listening, reading, and writing. Students in our program outperformed their peers in school assessments, and strong bonds were formed through regular interaction and shared growth. The involvement of teachers was a proud milestone, and the heartfelt appreciation from learners highlighted the impact and dedication of everyone involved.</p></div><div class="image-container"><img src="assets/img/map_images/INEN30.jpg" alt="Batch Image" /></div></div>'
         }
     },
     
