@@ -125,8 +125,13 @@ async function onPageLoad() {
 
 function loadImages(data) {
 	// Display team members by generating html
+	//new line added; to avoid duplicates additions of members
+	const addedIds= new Set();
 	function addCards(team) {
 		team.forEach((member) => {
+			//new line of code added to check if a member was already added
+		if (addedIds.has(member.id)) return;
++			addedIds.add(member.id);
 			var div = document.createElement("div");
 			div.setAttribute("class", `team-card`);
 			div.setAttribute("id", `${member.id}`);
@@ -222,13 +227,15 @@ function loadImages(data) {
 	}
 }
 
+//disabled for testing
 function removeElement(element) {
-	if (element != null) {
-		try {
-			element.parentNode.parentNode.parentNode.parentNode.remove();
-		} catch (e) { }
-	}
+	//if (element != null) {
+	//	try {
+	///		element.parentNode.parentNode.parentNode.parentNode.remove();
+	//	} catch (e) { }
+	//}
 }
+
 
 // Display partners by generating html
 function loadPartners(partnerData) {
