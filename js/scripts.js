@@ -227,13 +227,13 @@ function loadImages(data) {
 	}
 }
 
-//disabled for testing
+//disabled for testing //enabled
 function removeElement(element) {
-	//if (element != null) {
-	//	try {
-	///		element.parentNode.parentNode.parentNode.parentNode.remove();
-	//	} catch (e) { }
-	//}
+	if (element != null) {
+	try {
+			element.parentNode.parentNode.parentNode.parentNode.remove();
+	} catch (e) { }
+  }
 }
 
 
