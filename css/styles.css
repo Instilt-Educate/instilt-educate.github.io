@@ -656,6 +656,7 @@ a:hover {
 }
 
 .middle-text {
+    display: none;
     flex-grow: 1;
     text-align: center;
     margin-left: 5%;
