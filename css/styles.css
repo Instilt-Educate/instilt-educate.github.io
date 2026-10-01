@@ -484,6 +484,7 @@ a:hover {
 
 .navbar-nav {
     padding-top: 10px;
+    align-items: center;
 }
 
 
@@ -595,6 +596,7 @@ a:hover {
     #mainNav .fa-facebook,
     #mainNav .fa-linkedin,
     #mainNav .fa-instagram,
+    #mainNav .fa-youtube,
     #mainNav .fa-envelope {
         transition: color 0.3s ease-in-out;
         color: rgb(255, 255, 255, 0.75);
@@ -604,15 +606,17 @@ a:hover {
     #mainNav .fa-facebook:hover,
     #mainNav .fa-linkedin:hover,
     #mainNav .fa-instagram:hover,
+    #mainNav .fa-youtube:hover,
     #mainNav .fa-envelope:hover {
         transition: color 0.5s ease-in-out;
         background-color: transparent;
-        color: #dc3545;
+        color: #770000;
     }
 
     #mainNav.navbar-shrink .fa-facebook,
     #mainNav.navbar-shrink .fa-linkedin,
     #mainNav.navbar-shrink .fa-instagram,
+    #mainNav.navbar-shrink .fa-youtube,
     #mainNav.navbar-shrink .fa-envelope {
         transition: color 0.3s ease-in-out;
         color: rgb(255, 255, 255, 1);
@@ -621,10 +625,11 @@ a:hover {
     #mainNav.navbar-shrink .fa-facebook:hover,
     #mainNav.navbar-shrink .fa-linkedin:hover,
     #mainNav.navbar-shrink .fa-instagram:hover,
+    #mainNav.navbar-shrink .fa-youtube:hover,
     #mainNav.navbar-shrink .fa-envelope:hover {
         transition: color 0.5s ease-in-out;
         background-color: transparent;
-        color: #dc3545;
+        color: #770000;
     }
 }
 
