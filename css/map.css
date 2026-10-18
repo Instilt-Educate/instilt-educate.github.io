@@ -11,8 +11,8 @@
     justify-content: center;
 }
 
-/* switcher container */
-.map-container .switcher {
+/* switcher container*/
+.switcher {
     position: relative;
     width: 240px;
     height: 55px;
@@ -22,42 +22,43 @@
     display: flex;
 }
 
-/* toggle input style */
-.map-container .switcher input {
-    all: unset; /* reset Bootstrap/global form styles */
+/*toggle input style*/
+.switcher input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     position: relative;
     width: 240px;
     height: 50px;
     border-radius: 25px;
     background-color: #700000;
+    outline: none;
     font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    cursor: pointer;
 }
 
-/* text content for toggle */
-.map-container .switcher input:before,
-.map-container .switcher input:after {
+/* text content for toggle*/
+.switcher input:before,
+.switcher input:after {
     z-index: 2;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     color: #FFFFFF;
-    font-size: 14px;
-    pointer-events: none;
+    font-size: 18px;
 }
 
-.map-container .switcher input:before {
+.switcher input:before {
     content: "MEMBERS";
-    left: 26px;
+    left: 23px;
 }
 
-.map-container .switcher input:after {
+.switcher input:after {
     content: "BATCHES";
-    right: 25px;
+    right: 24px;
 }
 
-/* toggle label styling */
-.map-container .switcher label {
+/* toggle label styling*/
+.switcher label {
     z-index: 1;
     position: absolute;
     top: 10px;
@@ -67,30 +68,33 @@
     left: 130px;
     right: 5px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    display: block !important; /* ensure visible */
-    color: #fff !important;
 }
 
-/* switcher transitions */
-.map-container .switcher.switcher-1 input {
+.switcher.switcher-1 input:checked+label, 
+.switcher.switcher-1 input:not(:checked)+label {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* switcher transition for checked state */
+.switcher.switcher-1 input {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.map-container .switcher.switcher-1 input:not(:checked) {
+.switcher.switcher-1 input:not(:checked) {
     background-color: #1E1E1E;
 }
 
-.map-container .switcher.switcher-1 input:not(:checked):before {
+.switcher.switcher-1 input:not(:checked):before {
     color: #CCCCCC;
     transition: color 0.5s 0.2s;
 }
 
-.map-container .switcher.switcher-1 input:not(:checked):after {
+.switcher.switcher-1 input:not(:checked):after {
     color: #CCCCCC;
     transition: color 0.5s;
 }
 
-.map-container .switcher.switcher-1 input:not(:checked) + label {
+.switcher.switcher-1 input:not(:checked)+label {
     left: 15px;
     right: 120px;
     bottom: 9px;
@@ -98,69 +102,45 @@
     transition: left 0.5s, right 0.4s 0.2s, background-color 0.3s;
 }
 
-.map-container .switcher.switcher-1 input:checked {
+
+/* switcher transition for unchecked state */
+.switcher.switcher-1 input:checked {
     background: #700000;
     transition: all 0.4s ease-in-out;
 }
 
-.map-container .switcher.switcher-1 input:checked:before {
+.switcher.switcher-1 input:checked:before {
     color: #CCCCCC;
     transition: color 0.5s;
 }
 
-.map-container .switcher.switcher-1 input:checked:after {
+.switcher.switcher-1 input:checked:after {
     color: #CCCCCC;
     transition: color 0.5s 0.2s;
 }
 
-.map-container .switcher.switcher-1 input:checked + label {
+.switcher.switcher-1 input:checked+label {
     left: 130px;
-    right: 15px;
+    right: 5px;
     bottom: 9px;
     background: #1E1E1E;
     transition: all 0.4s ease-in-out;
 }
 
-/* image container in map section */
-.map-container .image-container {
+.image-container {
     display: flex;
+    /* Use flexbox */
     justify-content: space-between;
+    /* Ensure the text and image have space between them */
     align-items: flex-start;
+    /* Align items at the top */
     margin-top: 10px;
     gap: 20px;
+    /* Add some space between the text and the image */
 }
 
-.map-container .image-container img {
+.image-container img {
     max-width: 100%;
+    /* Adjust the size of the image */
     border-radius: 5px;
-}
-
-/*pop-up container*/
-.map-container .content-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 10px;
-    gap: 20px;
-}
-
-.map-container .batch-name {
-    font-weight: bold;
-    text-decoration: underline;
-    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.map-container .org-link {
-    text-decoration: underline;
-    color: #6a0dad;
-    font-weight: bold;
-}
-
-.map-container .org-link:hover {
-    color: #6a0dad;
-    text-decoration: none;
-}
-
-.map-container .text-content {
-    max-width: 45%; 
 }
