@@ -228,8 +228,8 @@ var teamData = [
         "id": 30,
         "name": "Arni Mahendra",
         "email": "arnimahendra09@gmail.com",
-        "division": "Cohort Head, Tutor",
-        "team": "Tutor",
+        "division": "Partnerships Coordinator",
+        "team": "Partnerships",
         "location": "New Delhi, India",
         "image": "https://drive.google.com/thumbnail?id=1ZpfM2hLpOO6xPCYICFnqi1tSg2hKR5vb"
     },
