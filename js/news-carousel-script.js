@@ -1,4 +1,4 @@
-import { cardData } from "./news-cards.js";
+import { cardData } from "./news-cards.js?v=20261031";
 
 $(document).ready(function() {
     function checkScreenSize() {
