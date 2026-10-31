@@ -1,9 +1,3 @@
-#map {
-    width: 100%;
-    margin-top: 10px;
-    border: 1px solid black;
-}
-
 .map-container {
     display: flex;
     flex-direction: column;
@@ -11,120 +5,355 @@
     justify-content: center;
 }
 
-/* switcher container*/
-.switcher {
+/* The stage reserves the map's footprint (its aspect ratio is set from the projection),
+   so switching views never moves the page below. */
+.map-stage {
     position: relative;
-    width: 240px;
-    height: 55px;
-    z-index: 1000;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    aspect-ratio: 2.1 / 1;
+    background: #700000;
+    overflow: hidden;
 }
 
-/*toggle input style*/
-.switcher input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    position: relative;
-    width: 240px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: #700000;
+#map svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+#map svg:active {
+    cursor: grabbing;
+}
+
+.map-land path {
+    fill: #050505;
+    stroke: #3a0707;
+    stroke-width: 0.5;
+    vector-effect: non-scaling-stroke;
+}
+
+.map-markers {
+    fill: #FFFFFF;
+    stroke: #700000;
+    filter: drop-shadow(0 1.5px 1.5px rgba(0, 0, 0, 0.55));
+}
+
+.marker {
+    cursor: pointer;
     outline: none;
-    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* text content for toggle*/
-.switcher input:before,
-.switcher input:after {
-    z-index: 2;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.marker-body {
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marker-hit {
+    fill: transparent;
+    stroke: none;
+    pointer-events: all;
+}
+
+.marker:hover .marker-body,
+.marker:focus-visible .marker-body {
+    transform: translateY(-2px);
+}
+
+.marker-pin {
+    fill: #FFFFFF;
+    stroke: #700000;
+    stroke-width: 0.75px;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    transition: fill 0.2s;
+}
+
+.marker-hole {
+    fill: #700000;
+    stroke: none;
+}
+
+.marker-glyph {
+    fill: #700000;
+    stroke: none;
+}
+
+.marker-tassel {
+    fill: none;
+    stroke: #700000;
+    stroke-width: 1.5px;
+    stroke-linecap: round;
+}
+
+.marker:hover .marker-pin,
+.marker:focus-visible .marker-pin {
+    fill: #F7DADA;
+}
+
+.marker:focus-visible .marker-pin {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marker-body {
+        transition: none;
+    }
+}
+
+.map-regions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 8px;
+    max-width: 1100px;
+    margin: 14px 16px 0;
+}
+
+.map-regions button {
+    padding: 6px 14px;
+    border: 1px solid #700000;
+    border-radius: 999px;
+    background: transparent;
+    color: #700000;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.map-regions button:hover {
+    background: rgba(112, 0, 0, 0.1);
+}
+
+.map-regions button[aria-pressed="true"] {
+    background: #700000;
     color: #FFFFFF;
-    font-size: 18px;
 }
 
-.switcher input:before {
-    content: "MEMBERS";
-    left: 23px;
+.map-regions button:focus {
+    outline: none;
+    box-shadow: none;
 }
 
-.switcher input:after {
-    content: "BATCHES";
-    right: 24px;
+.map-regions button:focus-visible {
+    box-shadow: 0 0 0 2px rgba(112, 0, 0, 0.45);
 }
 
-/* toggle label styling*/
-.switcher label {
-    z-index: 1;
+.map-land path {
+    cursor: zoom-in;
+}
+
+.map-popover {
     position: absolute;
-    top: 10px;
-    bottom: 20px;
-    border-radius: 20px;
-    background-color: #1E1E1E;
-    left: 130px;
-    right: 5px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.switcher.switcher-1 input:checked+label, 
-.switcher.switcher-1 input:not(:checked)+label {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* switcher transition for checked state */
-.switcher.switcher-1 input {
-    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.switcher.switcher-1 input:not(:checked) {
-    background-color: #1E1E1E;
-}
-
-.switcher.switcher-1 input:not(:checked):before {
-    color: #CCCCCC;
-    transition: color 0.5s 0.2s;
-}
-
-.switcher.switcher-1 input:not(:checked):after {
-    color: #CCCCCC;
-    transition: color 0.5s;
-}
-
-.switcher.switcher-1 input:not(:checked)+label {
-    left: 15px;
-    right: 120px;
-    bottom: 9px;
-    background: #700000;
-    transition: left 0.5s, right 0.4s 0.2s, background-color 0.3s;
-}
-
-
-/* switcher transition for unchecked state */
-.switcher.switcher-1 input:checked {
-    background: #700000;
-    transition: all 0.4s ease-in-out;
-}
-
-.switcher.switcher-1 input:checked:before {
-    color: #CCCCCC;
-    transition: color 0.5s;
-}
-
-.switcher.switcher-1 input:checked:after {
-    color: #CCCCCC;
-    transition: color 0.5s 0.2s;
-}
-
-.switcher.switcher-1 input:checked+label {
-    left: 130px;
-    right: 5px;
-    bottom: 9px;
+    z-index: 3;
+    max-width: min(320px, calc(100% - 16px));
+    padding: 12px 14px;
+    border-radius: 10px;
     background: #1E1E1E;
-    transition: all 0.4s ease-in-out;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+}
+
+.map-popover--batches {
+    pointer-events: auto;
+    padding-right: 36px;
+}
+
+.map-popover[hidden] {
+    display: none;
+}
+
+.map-popover h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #FFFFFF;
+}
+
+.map-popover__count {
+    margin: 2px 0 6px;
+    color: #E3B8B8;
+    font-weight: 600;
+}
+
+.map-popover__body {
+    max-height: 150px;
+    overflow-y: auto;
+    color: #E8E2E2;
+}
+
+.map-popover__body p {
+    margin: 4px 0 0;
+}
+
+.map-popover__body .batch-name {
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.map-popover__body a {
+    color: #FFB4B4;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s;
+}
+
+.map-popover__body a:hover,
+.map-popover__body a:focus-visible {
+    color: #FFFFFF;
+    outline: none;
+}
+
+.map-popover__close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.map-popover__close:hover,
+.map-popover__close:focus-visible {
+    background: #700000;
+    outline: none;
+}
+
+.map-zoom {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.map-zoom button {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    background: #1E1E1E;
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.map-zoom button:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.map-zoom button:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.map-zoom button:hover {
+    background: #700000;
+}
+
+.map-zoom button:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: -2px;
+}
+
+/* view switcher: a two-option segmented control */
+.map-switch {
+    --switch-pad: 5px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 240px;
+    padding: var(--switch-pad);
+    border-radius: 999px;
+    background: #1E1E1E;
+    z-index: 2;
+}
+
+.map-switch__thumb {
+    position: absolute;
+    top: var(--switch-pad);
+    bottom: var(--switch-pad);
+    left: var(--switch-pad);
+    width: calc((100% - var(--switch-pad) * 2) / 2);
+    border-radius: 999px;
+    background: #700000;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-switch[data-view="batches"] .map-switch__thumb {
+    transform: translateX(100%);
+}
+
+.map-switch__opt {
+    position: relative;
+    padding: 12px 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #CFC6C6;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.map-switch__opt[aria-pressed="true"] {
+    color: #FFFFFF;
+}
+
+.map-switch__opt:hover {
+    color: #FFFFFF;
+}
+
+.map-switch__opt:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* keyboard focus only: a soft inset ring that stays inside the pill */
+.map-switch__opt:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 600px) {
+    .map-zoom {
+        right: 6px;
+        bottom: 6px;
+    }
+
+    .map-zoom button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .map-switch__thumb {
+        transition: none;
+    }
 }
 
 .image-container {
