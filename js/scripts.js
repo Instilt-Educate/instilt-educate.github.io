@@ -152,7 +152,7 @@ var teamDataPromise = getTeamData();
 async function onPageLoad() {
 	// import data from data.js
 	var partnerData;
-	import('./data.js').then((data) => {
+	import('./data.js?v=20261031').then((data) => {
 		partnerData = data.partnerData;
 		loadPartners(partnerData);
 	})
