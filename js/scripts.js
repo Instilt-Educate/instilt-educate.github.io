@@ -33,10 +33,60 @@
 		$(".navbar-collapse").collapse("hide");
 	});
 
-	// Activate scrollspy to add active class to navbar items on scroll
-	var scrollSpy = new bootstrap.ScrollSpy(document.body, {
-		target: '#mainNav'
-	})
+	// Scroll-spy: mark the nav link of the section the reader is in. The active section is the
+	// last one (in page order) whose top has passed a line just below the fixed navbar.
+	var spyLinks = Array.prototype.slice.call(
+		document.querySelectorAll('#mainNav .navbar-nav .nav-link[href^="#"]')
+	);
+	var spyTargets = spyLinks
+		.map(function (link) {
+			return { link: link, el: document.querySelector(link.getAttribute("href")) };
+		})
+		.filter(function (t) {
+			return t.el;
+		});
+	var spyLockedUntil = 0;
+
+	function setActiveNav(activeLink) {
+		spyLinks.forEach(function (link) {
+			var isActive = link === activeLink;
+			link.classList.toggle("active", isActive);
+			if (isActive) link.setAttribute("aria-current", "true");
+			else link.removeAttribute("aria-current");
+		});
+	}
+
+	function updateScrollSpy() {
+		// a clicked link stays active while the smooth scroll runs past other sections
+		if (Date.now() < spyLockedUntil) return;
+		// same 70px offset the smooth-scroll above lands on, plus some slack; independent of
+		// the navbar's height, which grows when the mobile menu is open
+		var line = window.scrollY + 70 + 40;
+		var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+		var current = null;
+		spyTargets.forEach(function (t) {
+			if (t.el.getBoundingClientRect().top + window.scrollY <= line) current = t.link;
+		});
+		if (atBottom && spyTargets.length) current = spyTargets[spyTargets.length - 1].link;
+		setActiveNav(current);
+	}
+
+	// cheap enough to run on every scroll event: a handful of rect reads
+	function queueScrollSpy() {
+		updateScrollSpy();
+	}
+
+	spyLinks.forEach(function (link) {
+		link.addEventListener("click", function () {
+			setActiveNav(link);
+			spyLockedUntil = Date.now() + 1100;
+			setTimeout(queueScrollSpy, 1150);
+		});
+	});
+	window.addEventListener("scroll", queueScrollSpy, { passive: true });
+	window.addEventListener("resize", queueScrollSpy);
+	window.addEventListener("load", queueScrollSpy);
+	updateScrollSpy();
 
 	// Collapse Navbar
 	var navbarCollapse = function () {
@@ -95,58 +145,59 @@ async function getTeamData() {
 	}
 }
 
+// Start fetching the team as soon as the script runs, so the data is usually in before the
+// reader scrolls anywhere near the section.
+var teamDataPromise = getTeamData();
+
 async function onPageLoad() {
 	// import data from data.js
-	// var teamData;
 	var partnerData;
 	import('./data.js').then((data) => {
-	// 	teamData = data.teamData;
-		partnerData = data.partnerData;	
-	// 	loadImages(teamData);
+		partnerData = data.partnerData;
 		loadPartners(partnerData);
 	})
 
-
-	const dataContainer = document.getElementById("loading_text");
-	dataContainer.textContent = "Loading...";
-	document.getElementById("loading_text").hidden = false;
-	const data = await getTeamData();
+	const loading = document.getElementById("loading_text");
+	loading.textContent = "Loading...";
+	loading.hidden = false;
+	const data = await teamDataPromise;
+	loading.hidden = true;
 	if (data != null) {
-		// console.log(data);
-		document.getElementById("loading_text").hidden = true;
-		// Display the fetched data
-		loadImages(data);	
-	} else {
-		document.getElementById("loading_text").hidden = true;
+		renderTeam(data);
 	}
-// }
-	// }
 }
 
-function loadImages(data) {
-	// Display team members by generating html
-	//new line added; to avoid duplicates additions of members
-	const addedIds= new Set();
+// Order the team (founder first, then leadership, then departments) and render every card in
+// one go. Photos then load in the background; each card shows an initials avatar until its
+// photo arrives, and keeps it if the photo never does.
+function renderTeam(data) {
+	const addedIds = new Set();
+	const cards = [];
+	const fragment = document.createDocumentFragment();
+	const template = document.getElementById("teams-page-content").innerHTML;
+
 	function addCards(team) {
 		team.forEach((member) => {
-			//new line of code added to check if a member was already added
-		if (addedIds.has(member.id)) return;
-+			addedIds.add(member.id);
-			var div = document.createElement("div");
-			div.setAttribute("class", `team-card`);
-			div.setAttribute("id", `${member.id}`);
-			div.innerHTML = document.getElementById("teams-page-content").innerHTML;
-			div.innerHTML = div.innerHTML
-				.replace(/{NAME}/g, member.name)
-				.replace(
-					/{DIVISION}/g,
-					member.position || member.division || member.team
-				)
-				.replace(/{LOCATION}/g, member.location);
+			// avoid adding the same member twice
+			if (addedIds.has(member.id)) return;
+			addedIds.add(member.id);
 
-			document.getElementById("main-card").appendChild(div);
+			var div = document.createElement("div");
+			div.setAttribute("class", "team-card");
+			div.setAttribute("id", `${member.id}`);
+			div.innerHTML = template;
+			div.querySelector(".name").textContent = member.name;
+			div.querySelector(".division").textContent =
+				member.position || member.division || member.team || "";
+			div.querySelector(".location").textContent = member.location || "";
+			div.querySelector(".team-initials").textContent = initialsOf(member.name);
+			if (member.email) div.querySelector(".team-email").href = `mailto:${member.email}`;
+
+			fragment.appendChild(div);
+			cards.push({ card: div, url: member.image });
 		});
 	}
+
 	// replace HR with Human Resources
 	data = data.map((m) => {
 		if (m.team === "HR") {
@@ -154,12 +205,11 @@ function loadImages(data) {
 		}
 		return m;
 	});
-	// display cards in order
 
 	// remove certain people
 	const remove = ["Danisha Panigrahi", "Shravani Tushar Kulkarni"]
 	data = data.filter((m) => !remove.includes(m.name))
-	data.map(card => {
+	data.forEach(card => {
 		if (card.position == "Cohort Head" && card.cohort) {
 			card.position = card.cohort + " " + card.position;
 		}
@@ -216,24 +266,42 @@ function loadImages(data) {
 	// other members
 	addCards(data);
 
-	for (var i = 0; i < data.length; i++) {
-		document
-			.getElementById(`${data[i].id}`)
-			.querySelector(".team-email").href = `mailto:${data[i].email}`;
-		// checkImage(data[i]);
-		document
-			.getElementById(`${data[i].id}`)
-			.querySelector(".team-image").src = `${data[i].image}`;
-	}
+	document.getElementById("main-card").appendChild(fragment);
+	loadTeamPhotos(cards);
 }
 
-//disabled for testing //enabled
-function removeElement(element) {
-	if (element != null) {
-	try {
-			element.parentNode.parentNode.parentNode.parentNode.remove();
-	} catch (e) { }
-  }
+function initialsOf(name) {
+	const words = (name || "").trim().split(/\s+/).filter(Boolean);
+	if (!words.length) return "";
+	const first = words[0][0];
+	const last = words.length > 1 ? words[words.length - 1][0] : "";
+	return (first + last).toUpperCase();
+}
+
+// Load photos a few at a time, in page order, without waiting for the reader to scroll.
+// A photo that is missing or fails to load simply leaves the initials avatar in place.
+function loadTeamPhotos(entries, concurrency = 6) {
+	let next = 0;
+
+	function loadNext() {
+		if (next >= entries.length) return;
+		const { card, url } = entries[next++];
+		if (!url) return loadNext();
+
+		const loader = new Image();
+		loader.decoding = "async";
+		loader.onload = () => {
+			const target = card.querySelector(".team-image");
+			target.src = url;
+			target.alt = card.querySelector(".name").textContent;
+			card.querySelector(".team-photo").classList.add("is-loaded");
+			loadNext();
+		};
+		loader.onerror = loadNext;
+		loader.src = url;
+	}
+
+	for (let i = 0; i < concurrency; i++) loadNext();
 }
 
 

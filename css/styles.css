@@ -1573,9 +1573,46 @@ a.text-primary:focus {
     justify-content: center;
 }
 
-.img img {
+/* Team photo: a fixed circle that holds an initials avatar until the photo has loaded, so
+   cards never change size or disappear while photos stream in. */
+.team-photo {
+    position: relative;
+    display: grid;
+    place-items: center;
     width: 150px;
+    height: 150px;
     border-radius: 50%;
+    overflow: hidden;
+    background: #f0dede;
+}
+
+.team-initials {
+    color: #700000;
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    user-select: none;
+}
+
+.team-photo .team-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.team-photo.is-loaded .team-image {
+    opacity: 1;
+}
+
+.team-photo.is-loaded .team-initials {
+    visibility: hidden;
+    transition: visibility 0s 0.4s;
 }
 
 
@@ -1610,9 +1647,13 @@ a.text-primary:focus {
 
 
 @media(max-width: 576px) {
-    .img img {
+    .team-photo {
         width: 110px;
         height: 110px;
+    }
+
+    .team-initials {
+        font-size: 1.75rem;
     }
 
     .content .name {
@@ -1872,4 +1913,67 @@ input {
 
 .capitalize {
     text-transform: capitalize;
+}
+
+/* NAVBAR: active section + desktop alignment */
+#mainNav .navbar-nav .nav-link.active {
+    color: #dc3545;
+}
+
+@media (min-width: 1350px) {
+    /* links and Donate share the bar's vertical centre with the logo and social icons */
+    .navbar-expand-lg .navbar-nav {
+        height: 86px;
+        padding-top: 0;
+        align-items: center;
+    }
+
+    #mainNav .nav-link,
+    #mainNav.navbar-shrink .nav-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 1.25rem;
+        border-bottom: 0;
+    }
+
+    /* underline: sits under the label, grows from the left on hover and when active */
+    #mainNav .nav-link:after,
+    #mainNav.navbar-shrink .nav-link:after,
+    #mainNav .nav-link:hover:after,
+    #mainNav.navbar-shrink .nav-link:hover:after {
+        position: absolute;
+        left: 1.25rem;
+        right: 1.25rem;
+        top: calc(50% + 16px);
+        width: auto;
+        border-bottom: 2px solid;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease-in-out;
+    }
+
+    #mainNav .nav-link:hover:after,
+    #mainNav.navbar-shrink .nav-link:hover:after,
+    #mainNav .nav-link.active:after,
+    #mainNav.navbar-shrink .nav-link.active:after {
+        transform: scaleX(1);
+    }
+
+    #mainNav .nav-link.active {
+        color: #dc3545;
+    }
+
+    #big-nav-donate {
+        margin-left: 0.75rem;
+    }
+
+    #big-nav-donate .nav-link-butn {
+        padding: 0.7rem 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        border: 0;
+        line-height: 1.4;
+    }
 }

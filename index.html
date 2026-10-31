@@ -49,9 +49,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     <script src="https://kit.fontawesome.com/21cad11b53.js" crossorigin="anonymous"></script>
-    <script id="mapdata-script" src="js/mapdata.js" type="application/javascript"></script>
-    <script id="mapjs-script" src="js/worldmap.js"></script>
 
+    <link rel="preconnect" href="https://tutor-timings.vercel.app">
+    <link rel="preconnect" href="https://drive.google.com">
+    <link rel="preconnect" href="https://lh3.googleusercontent.com">
     <script async src="https://tally.so/widgets/embed.js"></script>
 
     <script>
@@ -105,11 +106,11 @@
                     <ul class="navbar-nav ml-auto mr-0">
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#mission">Mission</a></li>
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#model">Model</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#partners">Partners</a></li>
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#method">Method</a></li>
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#join-us-page">Join Us</a></li>
-                        <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#partners">Partners</a></li>
-                        <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#newsletter">Newsletter</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link text-nowrap js-scroll-trigger" href="#team">Team</a></li>
                         <li id="big-nav-donate" class="nav-item"><a class="nav-link-butn btn-danger btn js-scroll-trigger" href="https://bank.hackclub.com/donations/start/instilt-educate">Donate</a></li>
                         <div class="menu-icons">
@@ -237,13 +238,14 @@
     <h2 id="maptext" style="text-transform: none; text-align: center;">Diverse Community of Members</h2>
     <br>
     <div class="map-container">
-        <span class="switcher switcher-1">
-        <input type="checkbox" id="switcher-1" onchange="toggleMap()">
-        <label for="switcher-1"></label>
-    </span>
-    <div id="map"></div>
+        <div class="map-switch" role="group" aria-label="Map view" data-view="members">
+            <span class="map-switch__thumb" aria-hidden="true"></span>
+            <button type="button" class="map-switch__opt" data-view="members" aria-pressed="true">Members</button>
+            <button type="button" class="map-switch__opt" data-view="batches" aria-pressed="false">Batches</button>
+        </div>
+        <div class="map-stage"><div id="map"></div></div>
     </div>
-    
+
 
     <!-- Owl Carousel Gallery -->
     <section id="model">
@@ -475,7 +477,10 @@
             <div class="content">
               <div class="img mb-4 sm:mb-5">
                 <a class="team-email" href="">
-                  <img class="team-image" onerror="removeElement(this)" class="red-highlight" loading="lazy" src="">
+                  <div class="team-photo">
+                    <span class="team-initials" aria-hidden="true"></span>
+                    <img class="team-image" decoding="async" alt="">
+                  </div>
                 </a>
               </div>
               <div class="details">
@@ -579,147 +584,22 @@
     <script src="js/news-carousel-script.js" type="module"></script>
 
     <!-- MAP JS -->
+    <script src="js/vendor/d3.min.js"></script>
+    <script src="js/vendor/topojson-client.min.js"></script>
+    <script src="js/vendor/world-110m.js"></script>
+    <script src="js/map-data.js"></script>
+    <script src="js/world-map.js"></script>
     <script>
-        let currentMap = "members";
-        let zoomIntervalID = null;
-
-
-        function removeScriptById(id) {
-            const el = document.getElementById(id);
-            if (el) el.parentNode.removeChild(el);
-        }
-
-        function addScript(id, src, onload) {
-            const script = document.createElement('script');
-            script.id = id;
-            script.src = src;
-            script.onload = onload || null;
-            document.body.appendChild(script);
-        }
-
-        function toggleMap() {
-            const checkbox = document.getElementById("switcher-1");
-            document.getElementById("map").innerHTML = "";
-
-            // Remove any existing map scripts
-            removeScriptById("mapdata-script");
-            removeScriptById("mapjs-script");
-
-            if (checkbox.checked) {
-                // Batches map
-                addScript("mapdata-script", "js/batches_mapdata.js", function() {
-                    addScript("mapjs-script", "js/batches_map.js", function() {
-                        setTimeout(registerZoomHook, 50);
-                        currentMap = "batches";
-                    });
+        document.querySelectorAll(".map-switch__opt").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const switcher = btn.closest(".map-switch");
+                switcher.dataset.view = btn.dataset.view;
+                switcher.querySelectorAll(".map-switch__opt").forEach(o => {
+                    o.setAttribute("aria-pressed", String(o === btn));
                 });
-            } else {
-                // Members map
-                addScript("mapdata-script", "js/mapdata.js", function() {
-                    addScript("mapjs-script", "js/worldmap.js", function() {
-                        currentMap = "members";
-                    });
-                });
-            }
-        }
-
-        // Load the initial map
-        window.onload = () => {
-            document.getElementById("map").innerHTML = "";
-            removeScriptById("mapdata-script");
-            removeScriptById("mapjs-script");
-            addScript("mapdata-script", "js/mapdata.js", function() {
-                addScript("mapjs-script", "js/worldmap.js", function() {
-                    currentMap = "members";
-                });
+                WorldMap.setView(btn.dataset.view);
             });
-        };
-
-        function registerZoomHook() {
-            if (window.simplemaps_worldmap) {
-                if (zoomIntervalID) {
-                    clearInterval(zoomIntervalID);
-                }
-
-                let lastZoomLevel = simplemaps_worldmap.zoom_level;
-                zoomIntervalID = setInterval(() => {
-                    const currentZoom = simplemaps_worldmap.zoom_level;
-
-                    if (currentZoom !== lastZoomLevel && currentMap === "batches") {
-                                lastZoomLevel = currentZoom;
-                                if(true){
-                                    if(currentZoom === "out"){
-                                        simplemaps_worldmap.mapdata.main_settings.location_size /= 1.6 ; // Decreases marker size
-                                    }else if(currentZoom === "region"){
-                                        simplemaps_worldmap.mapdata.main_settings.location_size *= 1.6; // Increases marker size
-                                    }
-                                }
-
-                                simplemaps_worldmap.refresh(); // re-render the map with updated config
-                    }
-                }, 200);
-            } else {
-            setTimeout(registerZoomHook, 100);
-            }
-        }
-
-        function gradualResizeImageMarkers(increase, multiplier) {
-            const steps = 10;
-            const interval = 10; // ms between animation steps
-
-            // Delay briefly to let DOM update after zoom
-            setTimeout(() => {
-                const images = document.querySelectorAll("#map img");
-
-                images.forEach(img => {
-                    // Get current scale from transform
-                    const transform = img.style.transform;
-                    const match = /scale\(([\d.]+)\)/.exec(transform);
-                    const currentScale = match ? parseFloat(match[1]) : 1;
-
-                    const targetScale = increase
-                        ? currentScale * multiplier
-                        : currentScale / multiplier;
-
-                    const stepScale = (targetScale - currentScale) / steps;
-
-                    let currStep = 0;
-
-                    const animate = setInterval(() => {
-                        currStep++;
-                        const newScale = currentScale + stepScale * currStep;
-                        img.style.transform = `scale(${newScale})`;
-                        img.style.transformOrigin = "center center"; // ensures smooth zoom from center
-
-                        if (currStep >= steps) clearInterval(animate);
-                    }, interval);
-                });
-            }, 50); // wait ~1 frame after zoom
-        }
-
-        //Function to make the increase and decrease in marker size more gradual
-        //increase specifies whether we're increasing or decreasing marker size (True = increase, False = decrease)
-        //Multiplier specifies how much we're changing size by, ex: 2.5x
-        function gradualZoom(increase, multiplier) {
-            const steps = 10;
-            const interval = 1; //1 milliseconds for duration of each transition step
-
-            let currStep = 0;
-
-            let initialSize = simplemaps_worldmap.mapdata.main_settings.location_size;
-            let finalSize = (increase) ? simplemaps_worldmap.mapdata.main_settings.location_size * multiplier : simplemaps_worldmap.mapdata.main_settings.location_size / multiplier;
-
-            //This setInterval helps make the transition smoother
-            const transition = setInterval(() => {
-                currStep++;
-
-                simplemaps_worldmap.mapdata.main_settings.location_size = initialSize + (finalSize - initialSize) * (currStep / steps);
-                simplemaps_worldmap.refresh();
-
-                if (currStep >= steps) clearInterval(transition);
-            }, interval)
-        }   
-        toggleMap();
+        });
     </script>
 
 </body>
